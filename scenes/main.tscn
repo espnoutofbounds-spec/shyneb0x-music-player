@@ -1,0 +1,345 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/player_window.gd" id="1_main"]
+[ext_resource type="Theme" path="res://themes/chrome_2003.tres" id="2_theme"]
+[ext_resource type="Script" path="res://scripts/eq_bars.gd" id="3_eq"]
+
+[node name="PlayerWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_main")
+
+[node name="Chrome" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layout" type="VBoxContainer" parent="Chrome"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TitleBar" type="PanelContainer" parent="Chrome/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_type_variation = &"TitleBar"
+
+[node name="TitleRow" type="HBoxContainer" parent="Chrome/Layout/TitleBar"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PlayLed" type="ColorRect" parent="Chrome/Layout/TitleBar/TitleRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.22, 0.28, 0.18, 1)
+
+[node name="TitleLabel" type="Label" parent="Chrome/Layout/TitleBar/TitleRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"TitleLabel"
+text = "ShyneB0X Music Player"
+
+[node name="SkinBadge" type="Label" parent="Chrome/Layout/TitleBar/TitleRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 11
+text = "music player"
+
+[node name="MiniButton" type="Button" parent="Chrome/Layout/TitleBar/TitleRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 24)
+layout_mode = 2
+text = "Mini"
+
+[node name="Accent" type="ColorRect" parent="Chrome/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.545098, 0.870588, 0.25098, 1)
+
+[node name="MainPad" type="MarginContainer" parent="Chrome/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="MainCol" type="VBoxContainer" parent="Chrome/Layout/MainPad"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="NowWell" type="PanelContainer" parent="Chrome/Layout/MainPad/MainCol"]
+layout_mode = 2
+theme_type_variation = &"LcdWell"
+
+[node name="NowLabel" type="Label" parent="Chrome/Layout/MainPad/MainCol/NowWell"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 0
+theme_type_variation = &"NowLabel"
+text = "— idle —"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="LcdRow" type="HBoxContainer" parent="Chrome/Layout/MainPad/MainCol"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LcdWell" type="PanelContainer" parent="Chrome/Layout/MainPad/MainCol/LcdRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LcdWell"
+
+[node name="TimeLabel" type="Label" parent="Chrome/Layout/MainPad/MainCol/LcdRow/LcdWell"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LcdLabel"
+text = "--:--  /  --:--"
+
+[node name="StatusWell" type="PanelContainer" parent="Chrome/Layout/MainPad/MainCol/LcdRow"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_type_variation = &"Well"
+
+[node name="StatusLabel" type="Label" parent="Chrome/Layout/MainPad/MainCol/LcdRow/StatusWell"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"StatusLabel"
+text = "Stopped"
+horizontal_alignment = 1
+
+[node name="SeekSlider" type="HSlider" parent="Chrome/Layout/MainPad/MainCol"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+editable = false
+
+[node name="Transport" type="HBoxContainer" parent="Chrome/Layout/MainPad/MainCol"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="PrevButton" type="Button" parent="Chrome/Layout/MainPad/MainCol/Transport"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 34)
+layout_mode = 2
+focus_neighbor_right = NodePath("../PlayButton")
+text = "Prev"
+
+[node name="PlayButton" type="Button" parent="Chrome/Layout/MainPad/MainCol/Transport"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 34)
+layout_mode = 2
+text = "Play"
+
+[node name="StopButton" type="Button" parent="Chrome/Layout/MainPad/MainCol/Transport"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 34)
+layout_mode = 2
+text = "Stop"
+
+[node name="NextButton" type="Button" parent="Chrome/Layout/MainPad/MainCol/Transport"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 34)
+layout_mode = 2
+text = "Next"
+
+[node name="Spacer" type="Control" parent="Chrome/Layout/MainPad/MainCol/Transport"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VolLabel" type="Label" parent="Chrome/Layout/MainPad/MainCol/Transport"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"SectionLabel"
+text = "VOL"
+
+[node name="VolumeSlider" type="HSlider" parent="Chrome/Layout/MainPad/MainCol/Transport"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 18)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.85
+
+[node name="Split" type="HBoxContainer" parent="Chrome/Layout/MainPad/MainCol"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="PlaylistCol" type="VBoxContainer" parent="Chrome/Layout/MainPad/MainCol/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="PlaylistHeader" type="Label" parent="Chrome/Layout/MainPad/MainCol/Split/PlaylistCol"]
+layout_mode = 2
+theme_type_variation = &"SectionLabel"
+text = "Playlist"
+
+[node name="PlaylistWell" type="PanelContainer" parent="Chrome/Layout/MainPad/MainCol/Split/PlaylistCol"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"Well"
+
+[node name="PlaylistList" type="ItemList" parent="Chrome/Layout/MainPad/MainCol/Split/PlaylistCol/PlaylistWell"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+
+[node name="PlaylistButtons" type="HBoxContainer" parent="Chrome/Layout/MainPad/MainCol/Split/PlaylistCol"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AddButton" type="Button" parent="Chrome/Layout/MainPad/MainCol/Split/PlaylistCol/PlaylistButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 32)
+layout_mode = 2
+text = "Add files"
+
+[node name="RemoveButton" type="Button" parent="Chrome/Layout/MainPad/MainCol/Split/PlaylistCol/PlaylistButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 32)
+layout_mode = 2
+text = "Remove"
+
+[node name="EqCol" type="VBoxContainer" parent="Chrome/Layout/MainPad/MainCol/Split"]
+custom_minimum_size = Vector2(268, 0)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="EqHeaderRow" type="HBoxContainer" parent="Chrome/Layout/MainPad/MainCol/Split/EqCol"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="EqHeader" type="Label" parent="Chrome/Layout/MainPad/MainCol/Split/EqCol/EqHeaderRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SectionLabel"
+text = "EQ"
+
+[node name="SkinOption" type="OptionButton" parent="Chrome/Layout/MainPad/MainCol/Split/EqCol/EqHeaderRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 26)
+layout_mode = 2
+fit_to_longest_item = true
+
+[node name="FullscreenButton" type="Button" parent="Chrome/Layout/MainPad/MainCol/Split/EqCol/EqHeaderRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(88, 26)
+layout_mode = 2
+text = "Full screen"
+
+[node name="EqWell" type="PanelContainer" parent="Chrome/Layout/MainPad/MainCol/Split/EqCol"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"LcdWell"
+
+[node name="EqBars" type="Control" parent="Chrome/Layout/MainPad/MainCol/Split/EqCol/EqWell"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_eq")
+
+[node name="FullscreenLayer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 20
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="FullBg" type="ColorRect" parent="FullscreenLayer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.04, 0.07, 0.04, 1)
+
+[node name="FullPad" type="MarginContainer" parent="FullscreenLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="FullCol" type="VBoxContainer" parent="FullscreenLayer/FullPad"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FullTop" type="HBoxContainer" parent="FullscreenLayer/FullPad/FullCol"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FullTitle" type="Label" parent="FullscreenLayer/FullPad/FullCol/FullTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LcdLabel"
+text = "Spectrum"
+
+[node name="ExitVizButton" type="Button" parent="FullscreenLayer/FullPad/FullCol/FullTop"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(88, 32)
+layout_mode = 2
+text = "Exit"
+
+[node name="FullscreenBars" type="Control" parent="FullscreenLayer/FullPad/FullCol"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_eq")
+bar_count = 48
+
+[node name="Player" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Add audio files"
+size = Vector2i(720, 480)
+access = 2
+file_mode = 1
+use_native_dialog = true
+filters = PackedStringArray("*.mp3,*.ogg,*.wav;Audio files", "*.mp3;MP3", "*.ogg;Ogg Vorbis", "*.wav;WAV")

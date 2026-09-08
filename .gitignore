@@ -1,0 +1,44 @@
+# Godot 4
+.godot/
+*.translation
+.gdskills/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Build output
+build/
+__pycache__/
+*.pyc
+
+# Internal ship notes and agent logs (keep on disk, never commit)
+SHIP_CHECKLIST.md
+_foreman_job*.md
+_grok_*
+
+# Local proof captures, not the app
+screenshot*.png
+tools/capture_*.gd
+tools/smoke_*.gd
+tools/inbox_proof_run.gd
+tools/verify_spectrum.gd
+tools/*_err.txt
+tools/*_out.txt
+tools/inbox_proof.txt
+
+# Generated test tones, not user music
+smoke_tone.wav
+proof_tone.wav
+
+# Repo inbox is not the live channel
+inbox/
+# Import stubs for files that stay off Git
+screenshot*.png.import
+smoke_tone.wav.import
+proof_tone.wav.import
+tools/verify_spectrum.gd.uid
+tools/capture_*.gd.uid
+tools/smoke_*.gd.uid
+tools/inbox_proof_run.gd.uid
