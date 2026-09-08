@@ -1,52 +1,44 @@
 # ShyneB0X Music Player
 
-A small local music player made in Godot 4. Default look is **Cyber**. The other skin is **Retro Chrome**.
+A small local music player. Default look is **Cyber**. The other skin is **Retro Chrome**.
 
-Not a library app. It plays files you add. No streaming, no accounts.
+The name is **ShyneB0X** (digit zero, not the letter O).
 
-## Run in the editor
+It plays files you add. No streaming, no accounts, no web search. Music stays on the computer that has the files. The player remembers the last list of paths, plus volume and skin. It does not copy the audio. If a file moves, that row comes back missing.
 
-1. Open this project folder in Godot 4.7.
-2. Press F5.
-3. **Add files**, then Play.
-4. **Full screen** on the EQ row opens the visualizer. Esc or Exit returns.
-5. **Mini** shrinks to a strip. **Full** on the strip brings the main window back.
+## After you download
 
-## Agent inbox (local files only)
+This repo is the source. The Windows exe is not in Git.
 
-This player does **not** search the web, download, or use YouTube. Another agent can only add **absolute** `.mp3` / `.wav` paths already on that machine.
+1. Install Godot 4.7.
+2. Open this folder as a project.
+3. Press Play.
 
-The editor and the exported exe poll the same Godot user-data inbox. MCP writes those same files. Do not use the repo `inbox` folder.
+**Add files**, then play. **Mini** shrinks to a strip. **Full** on the strip brings the window back. **Full screen** on the EQ row opens the visualizer. Esc or Exit returns.
 
-**Add** (the running player polls this file):
+Want a double-click app? Use the Windows Desktop export preset. It writes `build/ShyneB0X.exe` on your machine. That file stays out of Git. On Windows, Godot needs [rcedit](https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe) if you want the icon stamped onto the exe.
 
-`%APPDATA%\Godot\app_userdata\ShyneB0X Music Player\inbox\add.json`
+## Agents on the machine that downloaded this
 
-```json
-{"paths": ["C:\\Music\\track.wav"]}
-```
+Another agent can add local tracks and play them. It cannot search the web or download music. Full steps are in `AGENTS.md`.
 
-**Play / pause / stop** (polled the same way, then cleared):
-
-`%APPDATA%\Godot\app_userdata\ShyneB0X Music Player\inbox\control.json`
-
-```json
-{"op": "play", "query": "track.wav"}
-```
-
-The player appends new accepted paths (no duplicates), then rewrites `add.json` to `{"paths":[]}`. After applying a control op it clears `control.json`. Poll interval is about 0.45s, plus once on launch after playlist restore.
-
-**MCP** ships in the repo too. It is not inside the Windows exe. Python 3, stdlib only, no pip install. From the project folder:
+1. Python 3. No pip install.
+2. Working directory is this repo (the folder that contains `tools/`).
+3. Start the player, then point the agent at:
 
 ```
 python tools/playlist-mcp/server.py
 ```
 
-Point the agent at that command. Tools: `add_tracks`, `list_playlist`, `play`, `pause`, `stop`. The server writes the inbox files only. It does **not** write Godot `user://player_state.json` while the player may be running. `list_playlist` reads `%APPDATA%\Godot\app_userdata\ShyneB0X Music Player\player_state.json` and merges pending `add.json` from that same user-data inbox folder.
+On Windows, use `py` instead if `python` is not on PATH.
 
-## Export
+Tools: `add_tracks`, `list_playlist`, `play`, `pause`, `stop`. Pass absolute `.mp3` or `.wav` paths that already exist on that computer. No URLs.
 
-The Windows `.exe` is the player only. The MCP stays in `tools/playlist-mcp` and is not bundled into the exe. This repo is not published yet.
+Do not create an inbox folder. Do not use an `inbox` folder inside this repo. The first `add_tracks`, `play`, `pause`, or `stop` creates the inbox in Godot user data for **this** install, under the app name `ShyneB0X Music Player`. On Windows that folder is:
+
+`%APPDATA%\Godot\app_userdata\ShyneB0X Music Player\inbox\`
+
+`add.json` queues paths. `control.json` is play, pause, or stop. The player polls about every 0.45 seconds, then clears the file. Send one control at a time. If the player is closed, paths queue and nothing plays until it is open.
 
 ## License
 
